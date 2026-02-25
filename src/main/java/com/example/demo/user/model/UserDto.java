@@ -5,6 +5,7 @@ import lombok.Getter;
 
 public class UserDto {
 
+    @Builder
     @Getter
     public static class SignupReq {
         private String email;
