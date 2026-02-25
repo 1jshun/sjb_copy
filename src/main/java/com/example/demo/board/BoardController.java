@@ -17,8 +17,9 @@ public class BoardController {
 
     @PostMapping("/reg")
     public ResponseEntity register(@RequestBody BoardDto.RegReq dto) {
+
         BoardDto.RegRes result = boardService.register(dto);
-        return ResponseEntity.ok(result);
+        return ResponseEntity.ok(BaseResponse.success(result));
     }
 
 
@@ -36,8 +37,8 @@ public class BoardController {
 
     @PutMapping("/update/{idx}")
     public ResponseEntity update(@PathVariable Long idx, @RequestBody BoardDto.RegReq dto) {
-        BoardDto.RegRes returnDto = boardService.update(idx, dto);
-        return ResponseEntity.ok(BaseResponse.success(returnDto));
+        BoardDto.RegRes result = boardService.update(idx, dto);
+        return ResponseEntity.ok(BaseResponse.success(result));
     }
 
     @DeleteMapping("/delete/{idx}")
