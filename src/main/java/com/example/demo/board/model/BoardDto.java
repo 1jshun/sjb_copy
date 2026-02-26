@@ -1,7 +1,7 @@
 package com.example.demo.board.model;
 
 import com.example.demo.reply.model.ReplyDto;
-import com.example.demo.user.model.User;
+import com.example.demo.user.model.AuthUserDetails;
 import lombok.*;
 
 import java.util.List;
@@ -12,11 +12,11 @@ public class BoardDto {
         private String title;
         private String contents;
 
-        public Board toEntity (User user) {
+        public Board toEntity(AuthUserDetails user) {
             return Board.builder()
                     .title(this.title)
                     .contents(this.contents)
-                    .user(user)
+                    .user(user.toEntity())
                     .build();
         }
     }
@@ -42,17 +42,17 @@ public class BoardDto {
     public static class ListRes {
         private Long idx;
         private String title;
-        private String userName;
-        private int count;
-        private int likeCount;
+        private String writer;
+        private int replyCount;
+        private int likesCount;
 
         public static ListRes from(Board entity) {
             return ListRes.builder()
                     .idx(entity.getIdx())
                     .title(entity.getTitle())
-                    .userName(entity.getUser().getName())
-                    .count(entity.getList().size())
-                    .likeCount(entity.getLikesList().size())
+                    .writer(entity.getUser().getName())
+                    .replyCount(entity.getReplyList().size())
+                    .likesCount(entity.getLikesList().size())
                     .build();
         }
     }
@@ -63,18 +63,18 @@ public class BoardDto {
         private Long idx;
         private String title;
         private String contents;
-        private String userName;
-        private List<ReplyDto.ListRes> replyList;
-        private int likeCount;
+        private String writer;
+        private List<ReplyDto.ReplyRes> replyList;
+        private int likesCount;
 
         public static ReadRes from(Board entity) {
             return ReadRes.builder()
                     .idx(entity.getIdx())
                     .title(entity.getTitle())
                     .contents(entity.getContents())
-                    .userName(entity.getUser().getName())
-                    .replyList(entity.getList().stream().map(ReplyDto.ListRes::from).toList())
-                    .likeCount(entity.getLikesList().size())
+                    .writer(entity.getUser().getName())
+                    .replyList(entity.getReplyList().stream().map(ReplyDto.ReplyRes::from).toList())
+                    .likesCount(entity.getLikesList().size())
                     .build();
         }
     }

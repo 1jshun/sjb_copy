@@ -1,8 +1,7 @@
 package com.example.demo.board;
 
 import com.example.demo.board.model.Board;
-import com.example.demo.user.UserRepository;
-import com.example.demo.user.model.User;
+import com.example.demo.user.model.AuthUserDetails;
 import lombok.RequiredArgsConstructor;
 import com.example.demo.board.model.BoardDto;
 import org.springframework.stereotype.Service;
@@ -13,10 +12,9 @@ import java.util.List;
 @Service
 public class BoardService {
     private final BoardRepository boardRepository;
-    private final UserRepository userRepository;
 
-    public BoardDto.RegRes register(BoardDto.RegReq dto, Long userIdx) {
-        User user = userRepository.findById(userIdx).orElseThrow();
+    public BoardDto.RegRes register(AuthUserDetails user, BoardDto.RegReq dto) {
+
         Board entity = boardRepository.save(dto.toEntity(user));
 
         return BoardDto.RegRes.from(entity);
