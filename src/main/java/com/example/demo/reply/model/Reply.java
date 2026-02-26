@@ -8,10 +8,10 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Builder
-@Getter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
+@Getter
 @Entity
 public class Reply {
     @Id
@@ -20,10 +20,10 @@ public class Reply {
     private String contents;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="board_idx")
-    private Board board;
+    @JoinColumn(name="user_idx")
+    private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="user_idx")
-    private User users;
+    @JoinColumn(name="board_idx")
+    private Board board;
 }

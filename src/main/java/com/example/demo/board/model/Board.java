@@ -36,7 +36,7 @@ public class Board extends BaseEntity {
     private User user;
 
     @OneToMany(mappedBy = "board", fetch = FetchType.LAZY)
-    private List<Reply> list;
+    private List<Reply> replyList;
 
     @OneToMany(mappedBy = "board", fetch = FetchType.LAZY)
     private List<Likes> likesList;

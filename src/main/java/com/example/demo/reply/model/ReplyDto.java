@@ -1,40 +1,41 @@
 package com.example.demo.reply.model;
 
 import com.example.demo.board.model.Board;
-import com.example.demo.user.model.User;
-import lombok.*;
+import com.example.demo.relation.model.A;
+import com.example.demo.relation.model.ADto;
+import com.example.demo.relation.model.BDto;
+import com.example.demo.user.model.AuthUserDetails;
+import lombok.Builder;
+import lombok.Getter;
+
+import java.util.List;
 
 public class ReplyDto {
-
     @Getter
-    @Setter
-    @AllArgsConstructor
-    @NoArgsConstructor
-    @Builder
-    public static class Req {
+    public static class ReplyReq {
         private String contents;
-        private Long boardIdx;
-        private Long userIdx;
 
-        public Reply toEntity(Board board, User user) {
+        public Reply toEntity(AuthUserDetails user, Long boardIdx) {
             return Reply.builder()
-                    .contents(this.contents)
-                    .board(board)
-                    .users(user)
+                    .contents(contents)
+                    .board(Board.builder().idx(boardIdx).build())
+                    .user(user.toEntity())
                     .build();
         }
     }
 
     @Builder
     @Getter
-    public static class ListRes {
+    public static class ReplyRes {
+        private Long idx;
         private String contents;
-        private String userName;
- 
-        public static ListRes from(Reply entity) {
-            return ListRes.builder()
+        private String writer;
+
+        public static ReplyDto.ReplyRes from(Reply entity) {
+            return ReplyRes.builder()
+                    .idx(entity.getIdx())
                     .contents(entity.getContents())
-                    .userName(entity.getUsers().getName())
+                    .writer(entity.getUser().getName())
                     .build();
         }
     }

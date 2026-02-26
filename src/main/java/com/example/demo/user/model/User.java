@@ -28,7 +28,7 @@ public class User {
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private List<Board> list;
 
-    @OneToMany(mappedBy = "users", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private List<Reply> lists;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
