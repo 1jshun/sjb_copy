@@ -12,10 +12,11 @@ public class BoardDto {
         private String title;
         private String contents;
 
-        public Board toEntity() {
+        public Board toEntity (User user) {
             return Board.builder()
                     .title(this.title)
                     .contents(this.contents)
+                    .user(user)
                     .build();
         }
     }
