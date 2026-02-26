@@ -1,6 +1,7 @@
 package com.example.demo.board.model;
 
 import com.example.demo.common.model.BaseEntity;
+import com.example.demo.likes.model.Likes;
 import com.example.demo.reply.model.Reply;
 import com.example.demo.user.model.User;
 import jakarta.persistence.*;
@@ -22,6 +23,8 @@ public class Board extends BaseEntity {
     private Long idx;
     private String title;
     private String contents;
+    private int likeCount;
+
 
     public void update(BoardDto.RegReq dto) {
         this.title = dto.getTitle();
@@ -34,4 +37,7 @@ public class Board extends BaseEntity {
 
     @OneToMany(mappedBy = "board", fetch = FetchType.LAZY)
     private List<Reply> list;
+
+    @OneToMany(mappedBy = "board", fetch = FetchType.LAZY)
+    private List<Likes> likesList;
 }
