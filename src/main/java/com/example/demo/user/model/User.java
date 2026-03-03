@@ -5,7 +5,9 @@ import com.example.demo.likes.model.Likes;
 import com.example.demo.reply.model.Reply;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @NoArgsConstructor
@@ -20,18 +22,20 @@ public class User {
     private String email;
     private String name;
     @Setter
+
     private String password;
     @Setter
     private boolean enable;
+
+    @ColumnDefault(value="'ROLE_USER'")
     private String role;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-    private List<Board> list;
+    List<Board> boardList;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-    private List<Reply> lists;
+    List<Reply> replyList;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-    private List<Likes> likesList;
-
+    List<Likes> likesList;
 }
