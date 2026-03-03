@@ -10,7 +10,9 @@ jwt:
 #      bucket:
 #    region:
 #      static:
-
+project:
+  aes:
+    key: ${AES_KEY}
 spring:
   security:
     oauth2:
@@ -79,5 +81,6 @@ spring:
 
 logging:
   level:
+    com.example.demo: debug
     org.hibernate.SQL: debug
     org.hibernate.orm.jdbc.bind: trace
