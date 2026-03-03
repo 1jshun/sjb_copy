@@ -3,10 +3,30 @@ package com.example.demo.board.model;
 import com.example.demo.reply.model.ReplyDto;
 import com.example.demo.user.model.AuthUserDetails;
 import lombok.*;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 
 public class BoardDto {
+    @Getter
+    @Builder
+    public static class PageRes {
+        private List<ListRes> boardList;
+        private int totalPage;
+        private Long totalCount;
+        private int currentPage;
+        private int currentSize;
+
+        public static PageRes from(Page<Board> result) {
+            return PageRes.builder()
+                    .boardList(result.get().map(ListRes::from).toList())
+                    .totalPage(result.getTotalPages())
+                    .totalCount(result.getTotalElements())
+                    .currentPage(result.getPageable().getPageNumber())
+                    .currentSize(result.getPageable().getPageSize())
+                    .build();
+        }
+    }
     @Getter
     public static class RegReq {
         private String title;
