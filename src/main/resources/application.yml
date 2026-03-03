@@ -10,7 +10,9 @@ jwt:
 #      bucket:
 #    region:
 #      static:
-
+project:
+  aes:
+    key: ${AES_KEY}
 spring:
   security:
     oauth2:
