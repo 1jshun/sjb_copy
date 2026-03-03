@@ -28,11 +28,14 @@ public class BoardController {
 
 
     @GetMapping("/list")
-    public ResponseEntity list() {
-        List<BoardDto.ListRes> dto = boardService.list();
-        return ResponseEntity.ok(BaseResponse.success(dto));
-    }
+    public ResponseEntity list(
+            @RequestParam(value = "page", defaultValue = "0") int page,
+            @RequestParam(value = "size", defaultValue = "10") int size) {
 
+        BoardDto.PageRes result = boardService.list(page, size);
+
+        return ResponseEntity.ok(BaseResponse.success(result));
+    }
     @GetMapping("/read/{idx}")
     public ResponseEntity read(@PathVariable Long idx) {
         BoardDto.ReadRes dto = boardService.read(idx);
