@@ -30,6 +30,11 @@ public class UserDto {
             } else if(provider.equals("google")){
                 email = (String)attributes.get("email");
                 name = (String) attributes.get("name");
+            } else if (provider.equals("naver")) {
+                Map<String, Object> response = (Map<String, Object>) attributes.get("response");
+                email = (String) response.get("email");
+                name = (String) response.get("name");
+                
             }
 
             return OAuth.builder()
